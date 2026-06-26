@@ -144,8 +144,44 @@ const updateCartQuantity = async (req, res) => {
     }
 };
 
+// ==========================
+// Remove Item From Cart
+// ==========================
+const removeCartItem = async (req, res) => {
+    try {
+
+        const cartItem = await Cart.findOne({
+            _id: req.params.id,
+            user: req.user.id
+        });
+
+        if (!cartItem) {
+            return res.status(404).json({
+                success: false,
+                message: "Cart item not found"
+            });
+        }
+
+        await Cart.findByIdAndDelete(req.params.id);
+
+        res.status(200).json({
+            success: true,
+            message: "Item removed from cart"
+        });
+
+    } catch (error) {
+
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+
+    }
+};
+
 module.exports = {
     addToCart,
     getCart,
-    updateCartQuantity
+    updateCartQuantity,
+    removeCartItem
 };
