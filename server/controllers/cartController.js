@@ -179,9 +179,35 @@ const removeCartItem = async (req, res) => {
     }
 };
 
+// ==========================
+// Clear Entire Cart
+// ==========================
+const clearCart = async (req, res) => {
+    try {
+
+        await Cart.deleteMany({
+            user: req.user.id
+        });
+
+        res.status(200).json({
+            success: true,
+            message: "Cart cleared successfully"
+        });
+
+    } catch (error) {
+
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+
+    }
+};
+
 module.exports = {
     addToCart,
     getCart,
     updateCartQuantity,
-    removeCartItem
+    removeCartItem,
+    clearCart
 };
