@@ -97,7 +97,55 @@ const getCart = async (req, res) => {
     }
 };
 
+// ==========================
+// Update Cart Quantity
+// ==========================
+const updateCartQuantity = async (req, res) => {
+    try {
+
+        const { quantity } = req.body;
+
+        if (quantity < 1) {
+            return res.status(400).json({
+                success: false,
+                message: "Quantity must be at least 1"
+            });
+        }
+
+        const cartItem = await Cart.findOne({
+            _id: req.params.id,
+            user: req.user.id
+        });
+
+        if (!cartItem) {
+            return res.status(404).json({
+                success: false,
+                message: "Cart item not found"
+            });
+        }
+
+        cartItem.quantity = quantity;
+
+        await cartItem.save();
+
+        res.status(200).json({
+            success: true,
+            message: "Cart updated successfully",
+            cartItem
+        });
+
+    } catch (error) {
+
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+
+    }
+};
+
 module.exports = {
     addToCart,
-    getCart
+    getCart,
+    updateCartQuantity
 };
