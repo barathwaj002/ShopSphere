@@ -71,6 +71,35 @@ const placeOrder = async (req, res) => {
     }
 };
 
+// ==============================
+// Get My Orders
+// ==============================
+const getMyOrders = async (req, res) => {
+    try {
+
+        const orders = await Order.find({
+            user: req.user.id
+        })
+        .populate("orderItems.product")
+        .sort({ createdAt: -1 });
+
+        res.status(200).json({
+            success: true,
+            count: orders.length,
+            orders
+        });
+
+    } catch (error) {
+
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+
+    }
+};
+
 module.exports = {
-    placeOrder
+    placeOrder,
+    getMyOrders
 };
