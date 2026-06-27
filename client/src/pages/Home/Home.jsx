@@ -1,19 +1,12 @@
 import Hero from "../../components/hero/Hero";
+import FeaturedProducts from "./FeaturedProducts";
 
 function Home() {
   return (
     <>
-      {/* Hero Section */}
       <Hero />
 
-      {/* Upcoming Sections */}
-      {/*
-        <Categories />
-        <FeaturedProducts />
-        <Features />
-        <Testimonials />
-        <Newsletter />
-      */}
+      <FeaturedProducts />
     </>
   );
 }
