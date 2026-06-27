@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import Button from "../common/Button";
+import HeroStats from "./HeroStats";
 
 function HeroContent() {
   return (
@@ -28,7 +29,6 @@ function HeroContent() {
       </p>
 
       <div className="mt-10 flex gap-5">
-
         <Button>
           Explore Collection
         </Button>
@@ -36,8 +36,10 @@ function HeroContent() {
         <Button variant="secondary">
           Shop Now
         </Button>
-
       </div>
+
+      {/* Hero Statistics */}
+      <HeroStats />
 
     </motion.div>
   );
