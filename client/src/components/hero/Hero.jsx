@@ -1,5 +1,6 @@
 import BackgroundEffects from "./BackgroundEffects";
 import HeroContent from "./HeroContent";
+import FloatingProducts from "./FloatingProducts";
 
 function Hero() {
   return (
@@ -7,9 +8,11 @@ function Hero() {
 
       <BackgroundEffects />
 
-      <div className="mx-auto flex min-h-screen max-w-7xl items-center px-8">
+      <div className="mx-auto flex min-h-screen max-w-7xl items-center justify-between px-8">
 
         <HeroContent />
+
+        <FloatingProducts />
 
       </div>
 
