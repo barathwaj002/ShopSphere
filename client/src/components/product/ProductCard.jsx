@@ -1,7 +1,21 @@
 import { motion } from "framer-motion";
 import { FiHeart, FiShoppingCart, FiStar } from "react-icons/fi";
+import api from "../../services/api";
+import toast from "react-hot-toast";
 
 function ProductCard({ product }) {
+  const handleAddToCart = async () => {
+     try {
+      await api.post("/cart", {
+        productId: product._id,
+      });
+      toast.success("Product added to cart!");
+     } catch (error) {
+      toast.error(
+        error.response?.data?.message || "Failed to add product."
+      );
+    }
+  };
   return (
     <motion.div
       whileHover={{
@@ -72,8 +86,7 @@ function ProductCard({ product }) {
             <FiHeart />
           </button>
 
-          <button className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-violet-600 py-3 font-semibold transition hover:bg-violet-500">
-
+          <button  onClick={handleAddToCart}className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-violet-600 py-3 font-semibold transition hover:bg-violet-500">
             <FiShoppingCart />
 
             Add to Cart
