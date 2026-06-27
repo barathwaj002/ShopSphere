@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../../services/api";
 import ProductCard from "./ProductCard";
+import ProductSkeleton from "./ProductSkeleton";
 
 function ProductGrid() {
   const [products, setProducts] = useState([]);
@@ -22,12 +23,14 @@ function ProductGrid() {
   }, []);
 
   if (loading) {
-    return (
-      <div className="py-20 text-center text-slate-400">
-        Loading Products...
-      </div>
-    );
-  }
+  return (
+    <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      {[...Array(6)].map((_, index) => (
+        <ProductSkeleton key={index} />
+      ))}
+    </div>
+  );
+}
 
   return (
     <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
