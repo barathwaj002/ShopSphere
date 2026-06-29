@@ -10,7 +10,7 @@ function FeaturedProducts() {
         subtitle="Explore our premium collection carefully selected for you."
       />
 
-      <ProductGrid />
+      <ProductGrid featured={true} />
 
     </section>
   );
