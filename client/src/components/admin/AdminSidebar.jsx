@@ -34,12 +34,6 @@ const links = [
     icon: <FiUsers />,
   },
 
-  {
-    name: "Analytics",
-    path: "/admin/analytics",
-    icon: <FiBarChart2 />,
-  },
-
 ];
 
 function AdminSidebar() {

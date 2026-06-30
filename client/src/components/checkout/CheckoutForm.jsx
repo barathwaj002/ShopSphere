@@ -25,7 +25,8 @@ function CheckoutForm() {
 
       toast.success("Order placed successfully!");
 
-      navigate("/orders");
+      console.log("ORDER SUCCESS");
+      navigate("/shop/orders");
 
     } catch (error) {
 

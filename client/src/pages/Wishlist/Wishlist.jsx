@@ -96,7 +96,7 @@ function Wishlist() {
           <div className="mt-12 text-center">
 
             <Link
-              to="/products"
+              to="/shop/products"
               className="rounded-2xl bg-violet-600 px-8 py-4 font-semibold text-white transition hover:bg-violet-500"
             >
 

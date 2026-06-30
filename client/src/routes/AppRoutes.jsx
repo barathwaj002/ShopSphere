@@ -1,59 +1,94 @@
 import { Routes, Route } from "react-router-dom";
 
 import Layout from "../components/layout/Layout";
+import AdminLayout from "../components/admin/AdminLayout";
 
-import Home from "../pages/Home/Home";
+// Landing
+import Landing from "../pages/Landing";
+
+// Authentication
 import Login from "../pages/Auth/Login";
+import Register from "../pages/Auth/Register";
+
+// User Pages
+import Home from "../pages/Home/Home";
+import Products from "../pages/Products/Products";
+import ProductDetails from "../pages/ProductDetails/ProductDetails";
+import Wishlist from "../pages/Wishlist/Wishlist";
 import Cart from "../pages/Cart/Cart";
 import Checkout from "../pages/Checkout/Checkout";
 import Orders from "../pages/Orders/Orders";
-import ProductDetails from "../pages/ProductDetails/ProductDetails";
-import Products from "../pages/Products/Products";
-import Wishlist from "../pages/Wishlist/Wishlist"; 
+import Profile from "../pages/Profile";
 
-import AdminLayout from "../components/admin/AdminLayout";
+// Support Pages
+import FAQ from "../pages/FAQ";
+import PrivacyPolicy from "../pages/PrivacyPolicy";
+import Terms from "../pages/Terms";
+import Contact from "../pages/Contact";
 
+// Admin
+import AdminRoute from "./AdminRoute";
 import Dashboard from "../pages/Admin/Dashboard";
 import AdminProducts from "../pages/Admin/Products";
 import AdminOrders from "../pages/Admin/Orders";
 import Users from "../pages/Admin/Users";
-import Analytics from "../pages/Admin/Analytics";
 
 function AppRoutes() {
   return (
     <Routes>
 
-      <Route path="/admin" element={<AdminLayout />}>
+      {/* ================= Landing ================= */}
 
-  <Route index element={<Dashboard />} />
+      <Route
+        path="/"
+        element={<Landing />}
+      />
 
-  <Route
-    path="products"
-    element={<AdminProducts />}
-  />
+      {/* ================= Authentication ================= */}
 
-  <Route
-    path="orders"
-    element={<AdminOrders />}
-  />
+      <Route
+        path="/login"
+        element={<Login />}
+      />
 
-  <Route
-    path="users"
-    element={<Users />}
-  />
+      <Route
+        path="/register"
+        element={<Register />}
+      />
 
-  <Route
-    path="analytics"
-    element={<Analytics />}
-  />
+      {/* ================= Support Pages ================= */}
 
-</Route>
+      <Route
+        path="/faq"
+        element={<FAQ />}
+      />
 
-      <Route path="/login" element={<Login />} />
+      <Route
+        path="/privacy-policy"
+        element={<PrivacyPolicy />}
+      />
 
-      <Route path="/" element={<Layout />}>
+      <Route
+        path="/terms"
+        element={<Terms />}
+      />
 
-        <Route index element={<Home />} />
+      <Route
+        path="/contact"
+        element={<Contact />}
+      />
+
+      {/* ================= User ================= */}
+
+      <Route
+        path="/shop"
+        element={<Layout />}
+      >
+
+        <Route
+          index
+          element={<Home />}
+        />
 
         <Route
           path="products"
@@ -83,6 +118,44 @@ function AppRoutes() {
         <Route
           path="orders"
           element={<Orders />}
+        />
+
+        <Route
+          path="profile"
+          element={<Profile />}
+        />
+
+      </Route>
+
+      {/* ================= Admin ================= */}
+
+      <Route
+        path="/admin"
+        element={
+          <AdminRoute>
+            <AdminLayout />
+          </AdminRoute>
+        }
+      >
+
+        <Route
+          index
+          element={<Dashboard />}
+        />
+
+        <Route
+          path="products"
+          element={<AdminProducts />}
+        />
+
+        <Route
+          path="orders"
+          element={<AdminOrders />}
+        />
+
+        <Route
+          path="users"
+          element={<Users />}
         />
 
       </Route>

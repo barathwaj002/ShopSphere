@@ -26,6 +26,24 @@ const userSchema = new mongoose.Schema(
             enum: ["user", "admin"],
             default: "user",
         },
+
+        phone: {
+            type: String,
+            default: "",
+            trim: true,
+        },
+
+        address: {
+            type: String,
+            default: "",
+            trim: true,
+        },
+
+        profileImage: {
+            type: String,
+            default:
+                "https://ui-avatars.com/api/?background=6D28D9&color=fff&name=User",
+        },
     },
     {
         timestamps: true,

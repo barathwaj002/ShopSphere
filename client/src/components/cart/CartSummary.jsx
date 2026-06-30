@@ -28,7 +28,7 @@ function CartSummary({ cart }) {
       </div>
 
       <button
-        onClick={() => navigate("/checkout")}
+        onClick={() => navigate("/shop/checkout")}
         className="mt-8 w-full rounded-2xl bg-violet-600 py-3 font-semibold text-white transition hover:bg-violet-500"
       >
         Proceed to Checkout

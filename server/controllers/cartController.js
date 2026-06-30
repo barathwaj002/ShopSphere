@@ -7,9 +7,9 @@ const Product = require("../models/Product");
 const addToCart = async (req, res) => {
     try {
 
-        const { productId } = req.body;
+        const { productId, quantity = 1 } = req.body;
 
-        // Check if productId is provided
+        // Validate Product ID
         if (!productId) {
             return res.status(400).json({
                 success: false,
@@ -17,7 +17,15 @@ const addToCart = async (req, res) => {
             });
         }
 
-        // Check whether product exists
+        // Validate Quantity
+        if (quantity < 1) {
+            return res.status(400).json({
+                success: false,
+                message: "Quantity must be at least 1"
+            });
+        }
+
+        // Check Product
         const product = await Product.findById(productId);
 
         if (!product) {
@@ -27,7 +35,15 @@ const addToCart = async (req, res) => {
             });
         }
 
-        // Check if product already exists in cart
+        // Check Stock
+        if (quantity > product.stock) {
+            return res.status(400).json({
+                success: false,
+                message: `Only ${product.stock} item(s) available in stock`
+            });
+        }
+
+        // Existing Cart Item
         let cartItem = await Cart.findOne({
             user: req.user.id,
             product: productId
@@ -35,8 +51,16 @@ const addToCart = async (req, res) => {
 
         if (cartItem) {
 
-            // Increase quantity
-            cartItem.quantity += 1;
+            const newQuantity = cartItem.quantity + quantity;
+
+            if (newQuantity > product.stock) {
+                return res.status(400).json({
+                    success: false,
+                    message: `Only ${product.stock} item(s) available in stock`
+                });
+            }
+
+            cartItem.quantity = newQuantity;
 
             await cartItem.save();
 
@@ -48,11 +72,11 @@ const addToCart = async (req, res) => {
 
         }
 
-        // Create new cart item
+        // Create New Cart Item
         cartItem = await Cart.create({
             user: req.user.id,
             product: productId,
-            quantity: 1
+            quantity
         });
 
         res.status(201).json({
@@ -77,9 +101,20 @@ const addToCart = async (req, res) => {
 const getCart = async (req, res) => {
     try {
 
+        console.log("================================");
+        console.log("req.user.id:", req.user.id);
+
         const cartItems = await Cart.find({
             user: req.user.id
         }).populate("product");
+
+        console.log(
+            "Users in returned cart:",
+            cartItems.map(item => item.user.toString())
+        );
+
+        console.log("Cart Count:", cartItems.length);
+        console.log("================================");
 
         res.status(200).json({
             success: true,
@@ -88,6 +123,8 @@ const getCart = async (req, res) => {
         });
 
     } catch (error) {
+
+        console.log(error);
 
         res.status(500).json({
             success: false,

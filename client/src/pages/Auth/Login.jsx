@@ -1,15 +1,21 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-import api from "../../services/api";
 import toast from "react-hot-toast";
 
+import api from "../../services/api";
 import useAuth from "../../hooks/useAuth";
 
 import Input from "../../components/common/Input";
 import PasswordInput from "../../components/common/PasswordInput";
 
+import useCart from "../../hooks/useCart";
+import useWishlist from "../../hooks/useWishlist";
+
 function Login() {
+
+  const { fetchCart } = useCart();
+  const { fetchWishlist } = useWishlist();
 
   const navigate = useNavigate();
 
@@ -19,11 +25,15 @@ function Login() {
 
   const [password, setPassword] = useState("");
 
+  const [loading, setLoading] = useState(false);
+
   const handleSubmit = async (e) => {
 
     e.preventDefault();
 
     try {
+
+      setLoading(true);
 
       const { data } = await api.post("/auth/login", {
         email,
@@ -31,66 +41,134 @@ function Login() {
       });
 
       login(data.user, data.token);
+      
 
-      toast.success("Login Successful!");
+      toast.success("Welcome Back!");
 
-      navigate("/");
+      navigate("/shop");
 
     } catch (error) {
 
+      console.log("LOGIN ERROR:", error);
+      console.log("RESPONSE:", error.response);
+      console.log("DATA:", error.response?.data);
+
       toast.error(
-        error.response?.data?.message || "Login failed"
+        error.response?.data?.message ||
+        "Login Failed"
       );
+
+    } finally {
+
+      setLoading(false);
 
     }
 
   };
 
   return (
+
     <div className="flex min-h-screen items-center justify-center bg-[#050816] px-6">
 
-      <form
-        onSubmit={handleSubmit}
-        className="w-full max-w-md rounded-3xl border border-white/10 bg-white/5 p-10 backdrop-blur-xl"
-      >
+      <div className="w-full max-w-md rounded-3xl border border-white/10 bg-white/5 p-10 backdrop-blur-xl">
 
-        <h1 className="mb-2 text-center text-4xl font-bold text-white">
-          Welcome Back
-        </h1>
+        <div className="mb-10 text-center">
 
-        <p className="mb-8 text-center text-slate-400">
-          Login to continue shopping.
-        </p>
+          <h1 className="text-4xl font-black text-violet-400">
 
-        <div className="space-y-6">
+            ShopSphere
+
+          </h1>
+
+          <h2 className="mt-5 text-3xl font-bold text-white">
+
+            Welcome Back 👋
+
+          </h2>
+
+          <p className="mt-3 text-slate-400">
+
+            Login to continue shopping.
+
+          </p>
+
+        </div>
+
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-6"
+        >
 
           <Input
             label="Email"
             type="email"
-            placeholder="Enter email"
+            placeholder="Enter your email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) =>
+              setEmail(e.target.value)
+            }
           />
 
           <PasswordInput
             label="Password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) =>
+              setPassword(e.target.value)
+            }
           />
 
           <button
             type="submit"
-            className="w-full rounded-2xl bg-violet-600 py-3 font-semibold text-white transition hover:bg-violet-500"
+            disabled={loading}
+            className="w-full rounded-2xl bg-violet-600 py-3 font-semibold text-white transition hover:bg-violet-500 disabled:cursor-not-allowed disabled:opacity-60"
           >
-            Login
+
+            {loading
+              ? "Signing In..."
+              : "Login"}
+
           </button>
+
+        </form>
+
+        <div className="mt-8 text-center">
+
+          <p className="text-slate-400">
+
+            Don't have an account?
+
+          </p>
+
+          <Link
+            to="/register"
+            className="mt-3 inline-block font-semibold text-violet-400 hover:text-violet-300"
+          >
+
+            Create New Account
+
+          </Link>
 
         </div>
 
-      </form>
+        <div className="mt-8 border-t border-white/10 pt-6 text-center">
+
+          <Link
+            to="/"
+            className="text-slate-400 transition hover:text-white"
+          >
+
+            ← Back to Landing Page
+
+          </Link>
+
+        </div>
+
+      </div>
 
     </div>
+
   );
+
 }
 
 export default Login;

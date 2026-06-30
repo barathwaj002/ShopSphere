@@ -13,7 +13,7 @@ function EmptyCart() {
       </p>
 
       <Link
-        to="/"
+        to="/shop/products"
         className="mt-8 rounded-2xl bg-violet-600 px-8 py-3 text-white transition hover:bg-violet-500"
       >
         Continue Shopping

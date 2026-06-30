@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import api from "../services/api";
+import useAuth from "../hooks/useAuth";
 
 export const WishlistContext = createContext();
 
@@ -7,11 +8,11 @@ function WishlistProvider({ children }) {
 
   const [wishlistItems, setWishlistItems] = useState([]);
 
+  const { token } = useAuth();
+
   const fetchWishlist = async () => {
 
     try {
-
-      const token = localStorage.getItem("token");
 
       if (!token) {
 
@@ -29,6 +30,8 @@ function WishlistProvider({ children }) {
 
       console.log(error);
 
+      setWishlistItems([]);
+
     }
 
   };
@@ -37,7 +40,7 @@ function WishlistProvider({ children }) {
 
     fetchWishlist();
 
-  }, []);
+  }, [token]);
 
   const wishlistCount = wishlistItems.length;
 
@@ -48,6 +51,7 @@ function WishlistProvider({ children }) {
         wishlistItems,
         wishlistCount,
         fetchWishlist,
+        setWishlistItems,
       }}
     >
 

@@ -127,7 +127,7 @@ function ProductCard({ product }) {
       }}
 
       onClick={() =>
-        navigate(`/products/${product._id}`)
+        navigate(`/shop/products/${product._id}`)
       }
 
       className="group cursor-pointer overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-xl transition-all hover:border-violet-500/40 hover:shadow-violet-500/20"

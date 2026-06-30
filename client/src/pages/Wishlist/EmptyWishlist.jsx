@@ -21,7 +21,7 @@ function EmptyWishlist() {
       </p>
 
       <Link
-        to="/products"
+        to="/shop/products"
         className="mt-10 rounded-2xl bg-violet-600 px-8 py-4 font-semibold text-white transition hover:bg-violet-500"
       >
         Continue Shopping
