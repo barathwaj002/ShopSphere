@@ -1,104 +1,82 @@
 # 🛒 ShopSphere
 
-> **A Modern Full-Stack E-Commerce Platform**
+A modern Full-Stack E-Commerce web application built using the **MERN Stack**. ShopSphere provides a seamless shopping experience with secure authentication, product management, cart, wishlist, order processing, invoice generation, and an admin dashboard.
 
-ShopSphere is a modern, responsive, and feature-rich Full-Stack E-Commerce web application developed using the MERN Stack. The application provides customers with a seamless online shopping experience while offering administrators a dedicated dashboard to efficiently manage products, orders, and users.
+## 🚀 Features
 
-Designed with a premium UI, secure authentication, role-based authorization, invoice generation, and responsive layouts, ShopSphere demonstrates real-world e-commerce workflows from product browsing to order management.
+- 🔐 JWT Authentication
+- 🛍️ Product Browsing
+- ❤️ Wishlist
+- 🛒 Shopping Cart
+- 📦 Order Placement
+- 🧾 Invoice Generation
+- 👤 User Profile Management
+- 👨‍💼 Admin Dashboard
+- 📱 Fully Responsive Design
 
----
+## 🛠️ Tech Stack
 
-# 📌 Table of Contents
+**Frontend**
+- React.js
+- Tailwind CSS
+- React Router
+- Axios
 
-- About the Project
-- Features
-- Technology Stack
-- Project Structure
-- Installation Guide
-- Environment Variables
-- Running the Project
-- User Modules
-- Admin Modules
-- API Overview
-- Screenshots
-- Future Enhancements
-- Developer
+**Backend**
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- JWT
+- bcrypt.js
 
----
+## ⚙️ Installation
 
-# 🚀 About the Project
+```bash
+# Clone the repository
+git clone https://github.com/your-username/ShopSphere.git
 
-ShopSphere is built to simulate a production-ready online shopping platform.
+# Install dependencies
+cd client
+npm install
 
-The application allows users to:
+cd ../server
+npm install
+```
 
-- Register and Login securely
-- Browse products
-- View product details
-- Add items to Wishlist
-- Add items to Cart
-- Place Orders
-- Download Invoice
-- Manage their Profile
+## 🔑 Environment Variables
 
-Administrators can:
+Create a `.env` file inside the **server** folder.
 
-- Manage Products
-- Manage Users
-- Manage Orders
-- View Dashboard Statistics
+```env
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_secret_key
+```
 
-The project follows a clean component-based architecture with reusable UI components and RESTful APIs.
+## ▶️ Run the Project
 
----
+Backend
 
-# ✨ Features
+```bash
+cd server
+npm run dev
+```
 
-## 👤 User Features
+Frontend
 
-- Secure JWT Authentication
-- Register & Login
-- Responsive Landing Page
-- Premium Home Page
-- Product Listing
-- Product Detail Page
-- Wishlist Management
-- Shopping Cart
-- Checkout
-- Invoice Generation
-- Order History
-- User Profile
-- Edit Profile
-- Change Password
-- Logout
-- Responsive Navigation
-- Footer with Support Pages
+```bash
+cd client
+npm run dev
+```
 
----
 
-## 👨‍💼 Admin Features
+## 👨‍💻 Developed By
 
-- Admin Dashboard
-- Product CRUD
-- User Management
-- Order Management
-- Protected Admin Routes
-- Role-Based Authorization
+**S. Barathwaj**
+
+B.E. Electronics and Communication Engineering
 
 ---
 
-## 🎨 UI Features
-
-- Responsive Design
-- Framer Motion Animations
-- Premium Cards
-- Glassmorphism Effects
-- Professional Footer
-- FAQ
-- Privacy Policy
-- Terms & Conditions
-- Contact Page
-- Browser Branding
-- Custom Favicon
-
----
+⭐ If you like this project, consider giving it a star on GitHub!
